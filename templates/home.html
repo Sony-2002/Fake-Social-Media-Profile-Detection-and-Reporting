@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            /* background-image: url('https://img.freepik.com/premium-photo/virus-warning-alert-computer-screen-detected-modish-cyber-threat_31965-60511.jpg'); */
+            background-image: url("{% static 'bgimage.jpg' %}");
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            background-color: #990000;
+            overflow: auto;
+            white-space: nowrap;
+            padding: 10px 0;
+        }
+
+        .navbar a {
+            display: inline-block;
+            color: white;
+            text-decoration: none;
+            padding: 12px 20px;
+            font-weight: bold;
+            font-size: 14px;
+            transition: background 0.3s ease;
+        }
+
+        .navbar a:hover {
+            background-color: #cc0000;
+        }
+
+        .main {
+            text-align: center;
+            padding: 60px;
+            color: white;
+        }
+
+        .main h1 {
+            color: red;
+            font-size: 30px;
+            text-shadow: 1px 1px 2px black;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <!-- <a href="{% url 'bargraph' %}">View Trained and Tested Accuracy in Bar Chart</a> -->
+        <a href="{% url 'account_status_chart' %}">View Account Status Chart</a>
+        <!-- <a href="{% url 'piechart' %}">View Trained Results</a> -->
+        <a href="{% url 'userdata' %}">View YOUR PROFILE</a>
+        <a href="{% url 'predict' %}">PREDICT ACCOUNT TYPE</a>
+        <!-- <a href="{% url 'view_all_users' %}">View All Remote Users</a> -->
+        <a href="{% url 'admin_dashboard' %}">User Dashboard</a>
+        <a href="{% url 'download_csv_report' %}">Download Report</a>
+        <a href="{% url 'logout' %}">Logout</a>
+        <a href="{% url 'admin:index' %}">
+            <i class="fas fa-user"></i>
+        </a>
+        
+        
+
+    </div>
+    <div class="main">
+        <h1>Detecting Malicious Accounts Using Machine Learning</h1>
+    </div>
+
+</body>
+</html>

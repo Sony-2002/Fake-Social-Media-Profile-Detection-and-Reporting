@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Instagram Fake Account Detector</title>
+</head>
+<body>
+    <h1>Instagram Fake Account Detector</h1>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label>Instagram Username:</label><br>
+        <input type="text" name="username" placeholder="Enter username"><br><br>
+
+        <label>Profile Link (optional):</label><br>
+        <input type="text" name="profile_link" placeholder="https://instagram.com/username"><br><br>
+
+        <label>Upload CSV file (optional):</label><br>
+        <input type="file" name="csv_file"><br><br>
+
+        <button type="submit">Check Account</button>
+    </form>
+
+    {% if result %}
+        <h3>{{ result }}</h3>
+    {% endif %}
+
+    {% if matched_accounts %}
+        <h3>Matched Account(s)</h3>
+        <table border="1">
+            <tr>
+                <th>Username</th>
+                <th>Profile Link</th>
+                <th>Status</th>
+            </tr>
+            {% for account in matched_accounts %}
+            <tr>
+                <td>{{ account.username }}</td>
+                <td>{{ account.profile_link }}</td>
+                <td>{{ account.status }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+</body>
+</html>

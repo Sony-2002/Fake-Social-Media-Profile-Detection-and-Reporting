@@ -1,0 +1,111 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register Your Details</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            /* background-image: url('https://img.freepik.com/premium-photo/virus-warning-alert-computer-screen-detected-modish-cyber-threat_31965-60511.jpg'); */
+            background-image: url("{% static 'bgimage.jpg' %}");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            font-family: Arial, sans-serif;
+            height: 100vh;
+        }
+
+        .form-container {
+            width: 300px;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            margin-left: 50px;
+            margin-top: 50px;
+            border-radius: 10px;
+        }
+
+        .form-container h2 {
+            text-align: center;
+            color: red;
+            font-weight: bold;
+        }
+
+        .form-container label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        .form-container input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .form-container button {
+            margin-top: 15px;
+            padding: 10px;
+            width: 100%;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .register-circle {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            border-radius: 50%;
+            text-align: center;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            padding-top: 20px;
+            margin-bottom: 10px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .title {
+            color: red;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 30px;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 12px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="title">Detecting Malicious Accounts Using Machine Learning</div>
+    <div class="form-container">
+        <div class="register-circle">REGISTER ✔</div>
+        <h2>REGISTER YOUR DETAILS HERE !!!</h2>
+        <form method="post">
+            {% csrf_token %}
+            <input type="text" name="username" placeholder="User Name" required>
+            <input type="email" name="email" placeholder="Email Address" required>
+            <input type="password" name="password1" placeholder="Password" required>
+            <input type="password" name="password2" placeholder="Confirm Password" required>
+            <input type="text" name="mobile" placeholder="Mobile Number" required>
+            <input type="text" name="country" placeholder="Country" required>
+            <input type="text" name="state" placeholder="State" required>
+            <input type="text" name="city" placeholder="City" required>
+            <button type="submit">sign_up</button>
+            <button type="button" onclick="location.href='{% url 'login' %}'">User Login</button>
+        </form>
+    </div>
+</body>
+</html>

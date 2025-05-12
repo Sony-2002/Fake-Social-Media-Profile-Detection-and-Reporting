@@ -1,0 +1,3 @@
+username,profile_link,status,flagged
+user1,http://twitter.com/user1,Original,False
+user2,http://twitter.com/user2,Fake,True

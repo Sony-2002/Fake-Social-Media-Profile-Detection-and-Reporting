@@ -1,0 +1,110 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            /* background-image: url('https://img.freepik.com/premium-photo/virus-warning-alert-computer-screen-detected-modish-cyber-threat_31965-60511.jpg'); */
+            background-image: url("{% static 'bgimage.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .overlay {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .login-box {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            width: 320px;
+            color: #000;
+            text-align: center;
+        }
+
+        .login-box input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .login-box button {
+            padding: 10px 20px;
+            background-color: orange;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .nav-buttons {
+            margin-top: 15px;
+        }
+
+        .nav-buttons a {
+            margin: 0 5px;
+            padding: 8px 15px;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+        }
+
+        h1 {
+            color: red;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        p.tags {
+            text-align: center;
+            font-size: 12px;
+            color: #eee;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay">
+        <h1>Detecting Malicious Accounts Using Machine Learning</h1>
+        <div class="login-box">
+            <form method="post">
+                {% csrf_token %}
+                <h3>Login Using Your Account</h3>
+                <input type="text" name="username" placeholder="User Name" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <button type="submit">LOGIN</button>
+            </form>
+            <div class="nav-buttons">
+                <a href="{% url 'register' %}">REGISTER</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

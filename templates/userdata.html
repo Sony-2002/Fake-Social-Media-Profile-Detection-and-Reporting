@@ -1,0 +1,90 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User data</title>
+    <style>
+        body {
+            /* background-image: url('https://img.freepik.com/premium-photo/virus-warning-alert-computer-screen-detected-modish-cyber-threat_31965-60511.jpg'); */
+            background-image: url("{% static 'bgimage.jpg' %}");
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            color: red;
+            text-align: center;
+        }
+
+        .container {
+            background-color: white;
+            margin: 50px auto;
+            padding: 20px;
+            width: 90%;
+            max-width: 900px;
+            border: 2px solid #ccc;
+        }
+
+        h2 {
+            color: red;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-weight: bold;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid red;
+        }
+
+        th {
+    background-color: red;
+    color: white;
+    text-align: left;
+    width: 30%;
+}
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ffdddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2> USER DATA !!!</h2>
+        <table>
+            <tbody>
+                <tr>
+                    <th>USER NAME</th>
+                    <td>{{ profile.user.username }}</td>
+                </tr>
+                <tr>
+                    <th>EMAIL</th>
+                    <td>{{ profile.user.email }}</td>
+                </tr>
+                <tr>
+                    <th>Mob No</th>
+                    <td>{{ profile.mobile }}</td>
+                </tr>
+                <tr>
+                    <th>Country</th>
+                    <td>{{ profile.country }}</td>
+                </tr>
+                <tr>
+                    <th>State</th>
+                    <td>{{ profile.state }}</td>
+                </tr>
+                <tr>
+                    <th>City</th>
+                    <td>{{ profile.city }}</td>
+                </tr>
+            </tbody>
+            
+        </table>
+    </div>
+</body>
+</html>

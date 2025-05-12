@@ -1,0 +1,87 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Remote Users</title>
+    <style>
+        body {
+            /* background-image: url('https://img.freepik.com/premium-photo/virus-warning-alert-computer-screen-detected-modish-cyber-threat_31965-60511.jpg'); */
+            background-image: url("{% static 'bgimage.jpg' %}");
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            color: red;
+            text-align: center;
+        }
+
+        .container {
+            background-color: white;
+            margin: 50px auto;
+            padding: 20px;
+            width: 90%;
+            max-width: 900px;
+            border: 2px solid #ccc;
+        }
+
+        h2 {
+            color: red;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-weight: bold;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid red;
+        }
+
+        th {
+            background-color: red;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ffdddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>VIEW ALL REMOTE USERS !!!</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>USER NAME</th>
+                    <th>EMAIL</th>
+                    <th>Mob No</th>
+                    <th>Country</th>
+                    <th>State</th>
+                    <th>City</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for profile in profiles %}
+                <tr>
+                    <td>{{ profile.user.username }}</td>
+                    <td>{{ profile.user.email }}</td>
+                    <td>{{ profile.mobile }}</td>
+                    <td>{{ profile.country }}</td>
+                    <td>{{ profile.state }}</td>
+                    <td>{{ profile.city }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6">No users found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

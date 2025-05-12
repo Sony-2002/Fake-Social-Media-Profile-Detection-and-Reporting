@@ -1,0 +1,101 @@
+<!-- admin_dashboard.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #2c3e50;
+            font-size: 24px;
+            margin-top: 40px;
+            text-decoration: underline;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            background-color: #ffffff;
+            margin: 10px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        a {
+            text-decoration: none;
+            color: #2980b9;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #1abc9c;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .report-link {
+            font-size: 18px;
+            color: #2980b9;
+            transition: color 0.3s ease;
+        }
+
+        .report-link:hover {
+            color: #e74c3c;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>User Dashboard</h1>
+
+        <h2>Flagged Accounts</h2>
+        <ul>
+            {% for account in flagged_accounts %}
+                <li>{{ account.username }} ({{ account.status }})</li>
+            {% endfor %}
+        </ul>
+
+        <h2>Unresolved Reports</h2>
+        <ul>
+            {% for report in unresolved_reports %}
+                <li>
+                    <a class="report-link" href="{% url 'resolve_report' report.id %}">Report for {{ report.account.username }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+</body>
+</html>

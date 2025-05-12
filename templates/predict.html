@@ -1,0 +1,134 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detecting Malicious Twitter Bots Using Machine Learning</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            background-image: url("{% static 'bgimage.jpg' %}");
+        }
+        header {
+            background-color: red;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+        .container {
+            max-width: 800px;
+            width: 90%;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            background-color: white;
+            box-shadow: 2px 2px 10px #aaa;
+        }
+        .report{
+            color:red;
+        }
+        .prediction-box {
+            border: 2px solid red;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        textarea, input[type="text"], input[type="url"], input[type="file"] {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: darkred;
+        }
+        .footer {
+            text-align: center;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: lightgray;
+        }
+        #accountType {
+            font-weight: bold;
+            font-size: 1.2em;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Detecting Malicious Accounts Using Machine Learning</h1>
+    </header>
+
+    <div class="container">
+        <h2>PREDICTION OF  ACCOUNT TYPE !!!</h2>
+
+        <form method="POST" enctype="multipart/form-data" action="{% url 'check_tweet' %}">
+            {% csrf_token %}
+            <label>Twitter Username:</label>
+            <input type="text" name="username" placeholder="Enter username" value="{{ request.POST.username }}">
+        
+            <label>Twitter Profile Link:</label>
+            <input type="url" name="profile_link" placeholder="Enter profile link" value="{{ request.POST.profile_link }}">
+        
+            <label>Upload CSV File:</label>
+            <input type="file" name="csv_file">
+        
+            <button type="submit">Predict</button>
+        </form>
+        
+        {% if result %}
+<h3>Account Type:</h3>
+<p id="accountType"
+   style="color: {% if result == 'Original' %}green{% elif result == 'Fake' %}red{% else %}black{% endif %};">
+   {{ result }}
+</p>
+{% endif %}
+
+        {% if matched_accounts %}
+            <h3>Matched Accounts:</h3>
+            <table border="1" cellpadding="5">
+                <tr>
+                    <th>Username</th>
+                    <th>Profile Link</th>
+                    <th>Status</th>
+                </tr>
+                {% for item in matched_accounts %}
+                <tr>
+                    <td>{{ item.username }}</td>
+                    <td>{{ item.profile_link }}</td>
+                    <td>{{ item.status }}</td>
+                    <td class="{% if item.status == 'Original' %}original{% elif item.status == 'Fake' %}fake{% else %}unknown{% endif %}">
+                        {{ item.status }}
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+        
+    </div>
+    {% if report %}
+        <div class="report">
+            <h3>Summary Report</h3>
+            <pre>{{ report }}</pre>
+        </div>
+    {% endif %}
+
+    <!-- <div class="footer">
+        <a href="{% url 'predict' %}">PREDICT TWEET ACCOUNT TYPE</a> | 
+        <a href="{% url 'userdata' %}">VIEW YOUR PROFILE</a> | 
+        <a href="{% url 'logout' %}">LOGOUT</a>
+    </div> -->
+</body>
+</html>

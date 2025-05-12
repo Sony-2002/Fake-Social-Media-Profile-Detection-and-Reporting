@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Detecting Malicious Twitter Bots Using Machine Learning</title>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('https://img.freepik.com/premium-photo/virus-warning-alert-computer-screen-detected-modish-cyber-threat_31965-60511.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        .header {
+            background-color: #8B0000;
+            padding: 20px;
+            text-align: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .navbar {
+            background-color: #B22222;
+            overflow: hidden;
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 12px 16px;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .navbar a:hover {
+            background-color: #FF6347;
+        }
+
+        #chartContainer {
+            width: 70%;
+            height: 400px;
+            margin: 40px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    Detecting Malicious Twitter Bots Using Machine Learning
+</div>
+
+<div class="navbar">
+    <a href="{% url 'bargraph' %}">View Trained and Tested Accuracy in Bar Chart</a>
+    <a href="{% url 'piechart' %}">View Trained Results</a>
+    <a href="{% url 'userdata' %}">View YOUR PROFILE</a>
+    <a href="{% url 'predict' %}">PREDICT TWEET ACCOUNT TYPE</a>
+    <a href="{% url 'view_all_users' %}">View All Remote Users</a>
+    <a href="{% url 'logout' %}">Logout</a>
+</div>
+
+
+<div id="chartContainer"></div>
+
+<script>
+    window.onload = function () {
+        var chart = new CanvasJS.Chart("chartContainer", {
+            animationEnabled: true,
+            theme: "light2",
+            axisY: {
+                title: "Accuracy (%)",
+                maximum: 80,
+                interval: 0.5,
+                labelFontSize: 14
+            },
+            axisX: {
+                labelFontSize: 14,
+                labelAutoFit: true
+            },
+            data: [{
+                type: "column", // Vertical bar chart
+                indexLabel: "{y}%",
+                indexLabelFontSize: 14,
+                indexLabelPlacement: "outside",
+                dataPoints: [
+                    { label: "Logistic Regression", y: 75.58, color: "#007BFF" },
+                    { label: "Naive Bayes", y: 73.28, color: "#dc3545" },
+                    { label: "SVM", y: 73.03, color: "#28a745" }
+                ]
+            }]
+        });
+        chart.render();
+    }
+</script>
+
+</body>
+</html>

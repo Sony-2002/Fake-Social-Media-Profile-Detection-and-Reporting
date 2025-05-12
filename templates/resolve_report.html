@@ -1,0 +1,10 @@
+<!-- resolve_report.html -->
+<h1>Resolve Report</h1>
+
+<p>Report for {{ report.account.username }}</p>
+<p>{{ report.report_text }}</p>
+
+<form method="POST">
+    {% csrf_token %}
+    <button type="submit">Mark as Resolved</button>
+</form>

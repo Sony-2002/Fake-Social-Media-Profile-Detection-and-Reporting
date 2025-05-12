@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Detecting Malicious Twitter Bots Using Machine Learning</title>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('https://img.freepik.com/premium-photo/virus-warning-alert-computer-screen-detected-modish-cyber-threat_31965-60511.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        .header {
+            background-color: #8B0000;
+            padding: 20px;
+            text-align: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .navbar {
+            background-color: #B22222;
+            overflow: hidden;
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 12px 16px;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .navbar a:hover {
+            background-color: #FF6347;
+        }
+
+        #chartContainer {
+            width: 100%;
+            height: 800px;
+            margin: 40px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .side-links {
+            position: absolute;
+            top: 200px;
+            left: 30px;
+            font-size: 16px;
+            color: purple;
+        }
+
+        .side-links a {
+            color: purple;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .side-links a:hover {
+            text-decoration: underline;
+        }
+
+        /* Hide the charts initially */
+        #pieChartContainer, #lineChartContainer {
+    width: 80%; /* Adjust the percentage as per your requirement */
+    height: 400px; /* Set the height of the charts */
+    margin: 40px auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+}
+
+    </style>
+</head>
+<body>
+
+<div class="header">
+    Detecting Malicious Twitter Bots Using Machine Learning
+</div>
+
+<div class="navbar">
+    <a href="{% url 'bargraph' %}">View Trained and Tested Accuracy in Bar Chart</a>
+    <a href="{% url 'piechart' %}">View Trained Results</a>
+    <a href="{% url 'userdata' %}">View YOUR PROFILE</a>
+    <a href="{% url 'predict' %}">PREDICT TWEET ACCOUNT TYPE</a>
+    <a href="{% url 'view_all_users' %}">View All Remote Users</a>
+    <a href="{% url 'logout' %}">Logout</a>
+</div>
+
+<div class="side-links">
+    <a href="#" id="showPieChart">PIE CHART</a>
+    <a href="#" id="showLineChart">LINE CHART</a>
+</div>
+
+<!-- Pie Chart -->
+<div id="pieChartContainer" style="margin-top: 40px;"></div>
+
+<!-- Line Chart -->
+<div id="lineChartContainer" style="margin-top: 40px;"></div>
+
+<script>
+    window.onload = function () {
+        // Pie Chart
+        var pieChart = new CanvasJS.Chart("pieChartContainer", {
+            animationEnabled: true,
+            title: {
+                text: "Tweet Account Type Distribution",
+                fontSize: 22
+            },
+            data: [{
+                type: "pie",
+                startAngle: 240,
+                indexLabel: "{label} - {y}%",
+                dataPoints: [
+                    { y: 45, label: "Genuine Accounts", color: "#28a745" },
+                    { y: 35, label: "Malicious Bots", color: "#dc3545" },
+                    { y: 20, label: "Suspicious", color: "#ffc107" }
+                ]
+            }]
+        });
+
+        // Line Chart
+        var lineChart = new CanvasJS.Chart("lineChartContainer", {
+            animationEnabled: true,
+            title: {
+                text: "Model Accuracy Over Time",
+                fontSize: 22
+            },
+            axisY: {
+                title: "Accuracy (%)",
+                includeZero: true
+            },
+            data: [{
+                type: "line",
+                color: "#007bff",
+                dataPoints: [
+                    { x: 1, y: 90 },
+                    { x: 2, y: 92 },
+                    { x: 3, y: 88 },
+                    { x: 4, y: 91 },
+                    { x: 5, y: 93 },
+                    { x: 6, y: 95 }
+                ]
+            }]
+        });
+
+        // Render both charts initially
+        pieChart.render();
+        lineChart.render();
+
+        // Hide the charts initially
+        document.getElementById("pieChartContainer").style.display = 'none';
+        document.getElementById("lineChartContainer").style.display = 'none';
+
+        // Function to show Pie Chart
+        document.getElementById("showPieChart").onclick = function () {
+            document.getElementById("pieChartContainer").style.display = 'block';
+            document.getElementById("lineChartContainer").style.display = 'none';
+        };
+
+        // Function to show Line Chart
+        document.getElementById("showLineChart").onclick = function () {
+            document.getElementById("pieChartContainer").style.display = 'none';
+            document.getElementById("lineChartContainer").style.display = 'block';
+        };
+    }
+</script>
+
+</body>
+</html>
